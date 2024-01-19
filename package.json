@@ -1,0 +1,29 @@
+{
+  "name": "@vaughandroid/phoenix",
+  "version": "0.0.1",
+  "description": "Projects as code - a project regenerator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaughandroid/phoenix.git"
+  },
+  "keywords": [
+    "project",
+    "projects",
+    "generate",
+    "generator",
+    "regenerate",
+    "regenerator",
+    "project-as-code",
+    "projects-as-code"
+  ],
+  "author": "Chris Vaughan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaughandroid/phoenix/issues"
+  },
+  "homepage": "https://github.com/vaughandroid/phoenix#readme"
+}
