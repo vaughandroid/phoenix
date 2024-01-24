@@ -1,5 +1,7 @@
 import { readFile, writeFile } from '../util/fileUtils'
+import { replaceTokens } from '../util/tokenUtils'
 import { GENERATED_FILE_MARKER } from './project'
+import { TokenObject } from './tokenObject'
 
 type CustomiseContentsFn = (contents: string) => string
 
@@ -30,8 +32,9 @@ export class ProjectFile {
     this.customise = params.customiseContents
   }
 
-  generate(): void {
-    let contents = this.templatePath ? readFile(this.templatePath) : ''
+  regenerateFile(tokens: TokenObject): void {
+    let contents = this.templatePath ? readFile(this.templatePath) : '';
+    contents = replaceTokens(contents, tokens);
     if (this.customise) {
       contents = this.customise(contents)
     }
