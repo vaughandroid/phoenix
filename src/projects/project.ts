@@ -14,10 +14,6 @@ interface ProjectParams {
   projectFiles?: ProjectFile[]
 }
 
-interface RegenerateFilesParams {
-  newProject?: boolean;
-}
-
 export class Project {
   /**
    * The set of tokens which will be replaced during file generation.
@@ -32,10 +28,10 @@ export class Project {
     this.projectFiles = params?.projectFiles ?? [];
   }
 
-  regenerateFiles({ newProject = false }: RegenerateFilesParams): void {
+  regenerateFiles(): void {
     deleteFiles(findMarkedFiles(GENERATED_FILE_MARKER));
     this.projectFiles.forEach((projectFile) => {
-      if (newProject || projectFile.regenerate) {
+      if (projectFile.regenerate) {
         projectFile.regenerateFile(this.tokens);
       }
     });
