@@ -28,7 +28,7 @@ export function deleteFiles(paths: string[]): void {
 
 export function findMarkedFiles(marker: string): string[] {
   const allFilePaths = FastGlob.globSync('**', {
-    ignore: ['node_modules/**', '.git/**'],
+    ignore: ['node_modules/**', '.git/**']
   })
 
   const generatedFiles: string[] = []

@@ -18,7 +18,7 @@ export class Project {
    * The key is the token name (without escape characters), and the value is the value which will be used in the generated file.
    */
   tokens: TokenObject
-  /** Files which are part of the project. */
+  /** The set of files which constitute the project. */
   projectFiles: ProjectFile[]
 
   constructor(params: ProjectParams | undefined = undefined) {
@@ -27,9 +27,9 @@ export class Project {
   }
 
   regenerateFiles(): void {
-    deleteFiles(findMarkedFiles(GENERATED_FILE_MARKER))
+    deleteFiles(findMarkedFiles(REGENERATED_FILE_MARKER))
     this.projectFiles.forEach((projectFile) => {
-      if (!projectFile.doNotRegenerate) {
+      if (projectFile.regenerate) {
         projectFile.regenerateFile({
           regeneratedFileMarker: REGENERATED_FILE_MARKER,
           ...this.tokens,

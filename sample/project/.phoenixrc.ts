@@ -9,14 +9,14 @@ project.tokens = {
   projectDescription: 'A sample project',
 };
 
-// TODO: Add 'from template' constructor which defaults the filename
+const templatePath = `${__dirname}/../template`
+
+// TODO: Add 'from template' constructor
 const packageJson = new JsonProjectFile({
-  // TODO: Set template path for project
   fileName: 'package.json',
-  templatePath: `${__dirname}/../template/package.json`,
+  templatePath: `${templatePath}/package.json`,
   customiseJson: (json: any) => {
-    // TODO: Add phoenix dependency automatically?
-    // Install from the local filesystem rather than NPM.
+    // Since we always want to use the current local code, use a local filesystem dependency rather than NPM.
     json['devDependencies']['@vaughandroid/phoenix'] = 'link:../../';
     return json;
   },
@@ -24,24 +24,25 @@ const packageJson = new JsonProjectFile({
 
 const eslintrcJs = new ProjectFile({
   fileName: '.eslintrc.js',
-  templatePath: `${__dirname}/../template/.eslintrc.js`,
+  templatePath: `${templatePath}/.eslintrc.js`,
 });
 
 const gitignore = new ProjectFile({
   fileName: '.gitignore',
-  templatePath: `${__dirname}/../template/.gitignore`,
+  templatePath: `${templatePath}/.gitignore`,
 });
 
 const prettierrcJs = new ProjectFile({
   fileName: '.prettierrc.js',
-  templatePath: `${__dirname}/../template/.prettierrc.js`,
+  templatePath: `${templatePath}/.prettierrc.js`,
 });
 
 const tsconfigJson = new JsonProjectFile({
   fileName: 'tsconfig.json',
-  templatePath: `${__dirname}/../template/tsconfig.json`,
+  templatePath: `${templatePath}/tsconfig.json`,
 });
 
+// TODO: Make projectFiles an object, with filenames for keys
 project.projectFiles = [
   packageJson,
   eslintrcJs,
