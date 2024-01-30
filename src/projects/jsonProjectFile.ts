@@ -1,14 +1,7 @@
 import { ProjectFile, ProjectFileParams } from './projectFile'
 
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | Json[]
-  | { [key: string]: Json }
-
-type CustomiseJsonFn = (json: Json) => Json
+// TODO: Could we define a useful JSON type? 
+type CustomiseJsonFn = (json: any) => any
 
 export interface JsonProjectFileParams
   extends Omit<ProjectFileParams, 'customiseContents'> {

@@ -1,3 +1,3 @@
-export { Project, PROJECT_FILENAME } from './projects/project';
+export { Project, PROJECT_FILENAME, REGENERATED_FILE_MARKER } from './projects/project';
 export { ProjectFile } from './projects/projectFile';
-export { Json, JsonProjectFile } from './projects/jsonProjectFile';
+export { JsonProjectFile } from './projects/jsonProjectFile';

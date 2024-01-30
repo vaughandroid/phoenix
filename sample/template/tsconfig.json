@@ -16,5 +16,5 @@
   "include": [
     "src/**/*"
   ],
-  "__generatedFile": "{{generatedFileComment}}"
+  "__generatedFile": "{{regeneratedFileMarker}}"
 }

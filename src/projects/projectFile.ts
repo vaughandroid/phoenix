@@ -1,6 +1,6 @@
 import { readFile, writeFile } from '../util/fileUtils'
 import { replaceTokens } from '../util/tokenUtils'
-import { GENERATED_FILE_MARKER } from './project'
+import { REGENERATED_FILE_MARKER } from './project'
 import { TokenObject } from './tokenObject'
 
 type CustomiseContentsFn = (contents: string) => string
@@ -41,9 +41,9 @@ export class ProjectFile {
 
     // Sense-check: regenerated files should always include the generated file marker somewhere.
     if (this.regenerate) {
-      if (!contents.includes(GENERATED_FILE_MARKER)) {
+      if (!contents.includes(REGENERATED_FILE_MARKER)) {
         throw new Error(
-          `Regenerated file ${this.fileName} does not include the generated file marker '${GENERATED_FILE_MARKER}`,
+          `Regenerated file ${this.fileName} does not include the generated file marker '${REGENERATED_FILE_MARKER}`,
         )
       }
     }

@@ -15,7 +15,7 @@ devDependencies:
     specifier: ^6.19.0
     version: 6.19.1(eslint@8.56.0)(typescript@5.3.3)
   '@vaughandroid/phoenix':
-    specifier: link:../..
+    specifier: link:../../
     version: link:../..
   eslint:
     specifier: ^8.56.0

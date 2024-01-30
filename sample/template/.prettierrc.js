@@ -1,4 +1,4 @@
-// {{generatedFileComment}}
+// {{regeneratedFileMarker}}
 module.exports = {
   singleQuote: true,
   tabWidth: 2
