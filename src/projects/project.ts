@@ -29,7 +29,7 @@ export class Project {
   regenerateFiles(): void {
     deleteFiles(findMarkedFiles(GENERATED_FILE_MARKER))
     this.projectFiles.forEach((projectFile) => {
-      if (projectFile.regenerate) {
+      if (!projectFile.doNotRegenerate) {
         projectFile.regenerateFile({
           regeneratedFileMarker: REGENERATED_FILE_MARKER,
           ...this.tokens,

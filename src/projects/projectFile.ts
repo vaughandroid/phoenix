@@ -8,7 +8,7 @@ type CustomiseContentsFn = (contents: string) => string
 export interface ProjectFileParams {
   fileName: string
   templatePath?: string
-  regenerate: boolean
+  doNotRegenerate: boolean
   customiseContents?: CustomiseContentsFn
 }
 
@@ -18,10 +18,9 @@ export class ProjectFile {
   /** The path of the template file. */
   templatePath?: string
   /**
-   * Whether the file should be re-generated each time.
-   * Set to false for files which should only be generated when the project is first created.
+   * Set to true for files which should only be generated once, when the project is first created.
    */
-  regenerate: boolean
+  doNotRegenerate: boolean
   /** An optional function which can be used to customise the file */
   customise?: CustomiseContentsFn
 
@@ -40,7 +39,7 @@ export class ProjectFile {
     }
 
     // Sense-check: regenerated files should always include the generated file marker somewhere.
-    if (this.regenerate) {
+    if (!this.doNotRegenerate) {
       if (!contents.includes(REGENERATED_FILE_MARKER)) {
         throw new Error(
           `Regenerated file ${this.fileName} does not include the generated file marker '${REGENERATED_FILE_MARKER}`,

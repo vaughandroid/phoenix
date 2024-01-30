@@ -14,8 +14,6 @@ const packageJson = new JsonProjectFile({
   // TODO: Set template path for project
   fileName: 'package.json',
   templatePath: `${__dirname}/../template/package.json`,
-  // TODO: Default regenerate to true?
-  regenerate: true,
   customiseJson: (json: any) => {
     // TODO: Add phoenix dependency automatically?
     // Install from the local filesystem rather than NPM.
@@ -27,25 +25,21 @@ const packageJson = new JsonProjectFile({
 const eslintrcJs = new ProjectFile({
   fileName: '.eslintrc.js',
   templatePath: `${__dirname}/../template/.eslintrc.js`,
-  regenerate: true,
 });
 
 const gitignore = new ProjectFile({
   fileName: '.gitignore',
   templatePath: `${__dirname}/../template/.gitignore`,
-  regenerate: true,
 });
 
 const prettierrcJs = new ProjectFile({
   fileName: '.prettierrc.js',
   templatePath: `${__dirname}/../template/.prettierrc.js`,
-  regenerate: true,
 });
 
 const tsconfigJson = new JsonProjectFile({
   fileName: 'tsconfig.json',
   templatePath: `${__dirname}/../template/tsconfig.json`,
-  regenerate: true,
 });
 
 project.projectFiles = [
