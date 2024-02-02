@@ -4,11 +4,12 @@
 
 [x] Make projectFiles an object, with filenames for keys
 [x] Refactor ProjectFiles
-[ ] Add 'from template' constructor
+[ ] Add `Project.fromTemplate()` factory method
+[ ] Update sample to include creating from scratch
 [ ] Unit tests
   [ ] Token replacement
   [ ] Finding files w/marker
-[ ] Create new project
+[ ] Support creating a new project
 
 ## Shoulds
 
