@@ -11,7 +11,6 @@ project.tokens = {
 
 const templatePath = `${__dirname}/../template`
 
-// TODO: Add 'from template' constructor
 const packageJson = new JsonProjectFile({
   fileName: 'package.json',
   templatePath: `${templatePath}/package.json`,
@@ -42,7 +41,6 @@ const tsconfigJson = new JsonProjectFile({
   templatePath: `${templatePath}/tsconfig.json`,
 });
 
-// TODO: Make projectFiles an object, with filenames for keys
 project.projectFiles = [
   packageJson,
   eslintrcJs,

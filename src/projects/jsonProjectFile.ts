@@ -1,6 +1,5 @@
 import { ProjectFile, ProjectFileParams } from './projectFile'
 
-// TODO: Could we define a useful JSON type? 
 type CustomiseJsonFn = (json: any) => any
 
 export interface JsonProjectFileParams
