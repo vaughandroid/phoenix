@@ -12,7 +12,7 @@ interface ProjectParams {
   regeneratedFiles?: ProjectFiles
 }
 
-export interface ProjectFiles {
+interface ProjectFiles{
   /** The key is the path of the generated file, relative to the project root. */
   [outputPath: string]: ProjectFile
 }

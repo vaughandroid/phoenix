@@ -1,5 +1,5 @@
 // Would be from "@vaughandroid/phoenix" in a real project
-import { JsonProjectFile, Project, ProjectFile, ProjectFiles } from '../../src';
+import { Project, ProjectFile } from '../../src';
 
 const project = new Project();
 
@@ -9,31 +9,28 @@ project.tokens = {
   projectDescription: 'A sample project',
 };
 
-const templatePath = `${__dirname}/../template`
+const templatePath = `${__dirname}/../template`;
 
-project.regeneratedFiles['package.json'] = new JsonProjectFile({
-  templatePath: `${templatePath}/package.json`,
-  customiseJson: (json: any) => {
-    // Since we always want to use the current local code, use a local filesystem dependency rather than NPM.
+project.regeneratedFiles['package.json'] = ProjectFile.fromJsonTemplate(
+  `${templatePath}/package.json`,
+  (json: any) => {
+    // Use a local filesystem link rather than NPM as we always want to use the current local code.
     json['devDependencies']['@vaughandroid/phoenix'] = 'link:../../';
     return json;
   },
-});
+);
 
-project.regeneratedFiles['.eslintrc.js'] = new ProjectFile({
-  templatePath: `${templatePath}/.eslintrc.js`,
-});
-
-project.regeneratedFiles['.gitignore'] = new ProjectFile({
-  templatePath: `${templatePath}/.gitignore`,
-});
-
-project.regeneratedFiles['.prettierrc.js'] = new ProjectFile({
-  templatePath: `${templatePath}/.prettierrc.js`,
-});
-
-project.regeneratedFiles['tsconfig.json'] = new JsonProjectFile({
-  templatePath: `${templatePath}/tsconfig.json`,
-});
+project.regeneratedFiles['.eslintrc.js'] = ProjectFile.fromTemplate(
+  `${templatePath}/.eslintrc.js`,
+);
+project.regeneratedFiles['.gitignore'] = ProjectFile.fromTemplate(
+  `${templatePath}/.gitignore`,
+);
+project.regeneratedFiles['.prettierrc.js'] = ProjectFile.fromTemplate(
+  `${templatePath}/.prettierrc.js`,
+);
+project.regeneratedFiles['tsconfig.json'] = ProjectFile.fromTemplate(
+  `${templatePath}/tsconfig.json`,
+);
 
 project.regenerateFiles();
