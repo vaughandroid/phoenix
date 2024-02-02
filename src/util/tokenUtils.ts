@@ -1,6 +1,6 @@
-import { TokenObject } from '../projects/tokenObject'
+import { Tokens } from '../projects/tokens'
 
-export function replaceTokens(contents: string, tokens: TokenObject): string {
+export function replaceTokens(contents: string, tokens: Tokens): string {
   return contents.replace(/\{\{\s*(\w+)\s*\}\}/g, (marker, token: string) => {
     if (!tokens.hasOwnProperty(token)) {
       throw new Error(`Missing token '${token}'`)

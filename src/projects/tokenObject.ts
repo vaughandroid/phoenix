@@ -1,1 +1,0 @@
-export type TokenObject = Record<string, string>

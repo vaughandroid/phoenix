@@ -1,7 +1,7 @@
 import { readFile, writeFile } from '../util/fileUtils'
 import { replaceTokens } from '../util/tokenUtils'
 import { REGENERATED_FILE_MARKER } from './project'
-import { TokenObject } from './tokenObject'
+import { Tokens } from './tokens'
 
 type CustomiseContentsFn = (contents: string) => string
 
@@ -30,7 +30,7 @@ export class ProjectFile {
     this.customise = params.customiseContents
   }
 
-  regenerateFile(tokens: TokenObject): void {
+  regenerateFile(tokens: Tokens): void {
     let contents = this.templatePath ? readFile(this.templatePath) : ''
     contents = replaceTokens(contents, tokens)
     if (this.customise) {

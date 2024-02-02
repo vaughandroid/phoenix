@@ -1,6 +1,6 @@
 import { deleteFiles, findMarkedFiles } from '../util/fileUtils'
 import { ProjectFile } from './projectFile'
-import { TokenObject } from './tokenObject'
+import { Tokens } from './tokens'
 
 const PHOENIX = 'phoenix'
 export const PROJECT_FILENAME = `.${PHOENIX}rc.ts`
@@ -17,7 +17,7 @@ export class Project {
    * The set of tokens which will be replaced during file generation.
    * The key is the token name (without escape characters), and the value is the value which will be used in the generated file.
    */
-  tokens: TokenObject
+  tokens: Tokens
   /** The set of files which constitute the project. */
   projectFiles: ProjectFile[]
 

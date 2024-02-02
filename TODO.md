@@ -7,6 +7,7 @@
 [] Unit tests
   [] Token replacement
   [] Finding files w/marker
+[] Create new project
 
 ## Should
 
