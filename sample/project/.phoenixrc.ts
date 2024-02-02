@@ -11,8 +11,7 @@ project.tokens = {
 
 const templatePath = `${__dirname}/../template`
 
-const packageJson = new JsonProjectFile({
-  fileName: 'package.json',
+project.regeneratedFiles['package.json'] = new JsonProjectFile({
   templatePath: `${templatePath}/package.json`,
   customiseJson: (json: any) => {
     // Since we always want to use the current local code, use a local filesystem dependency rather than NPM.
@@ -21,38 +20,20 @@ const packageJson = new JsonProjectFile({
   },
 });
 
-const eslintrcJs = new ProjectFile({
-  fileName: '.eslintrc.js',
+project.regeneratedFiles['.eslintrc.js'] = new ProjectFile({
   templatePath: `${templatePath}/.eslintrc.js`,
 });
 
-const gitignore = new ProjectFile({
-  fileName: '.gitignore',
+project.regeneratedFiles['.gitignore'] = new ProjectFile({
   templatePath: `${templatePath}/.gitignore`,
 });
 
-const prettierrcJs = new ProjectFile({
-  fileName: '.prettierrc.js',
+project.regeneratedFiles['.prettierrc.js'] = new ProjectFile({
   templatePath: `${templatePath}/.prettierrc.js`,
 });
 
-const tsconfigJson = new JsonProjectFile({
-  fileName: 'tsconfig.json',
+project.regeneratedFiles['tsconfig.json'] = new JsonProjectFile({
   templatePath: `${templatePath}/tsconfig.json`,
 });
-
-project.projectFiles = [
-  packageJson,
-  eslintrcJs,
-  gitignore,
-  prettierrcJs,
-  tsconfigJson,
-  ].reduce(
-    (acc, current) => {
-      acc[current.fileName] = current;
-      return acc;
-    },
-    {} as ProjectFiles
-  );
 
 project.regenerateFiles();
