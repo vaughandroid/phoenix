@@ -1,5 +1,5 @@
 // Would be from "@vaughandroid/phoenix" in a real project
-import { JsonProjectFile, Project, ProjectFile } from '../../src';
+import { JsonProjectFile, Project, ProjectFile, ProjectFiles } from '../../src';
 
 const project = new Project();
 
@@ -47,6 +47,12 @@ project.projectFiles = [
   gitignore,
   prettierrcJs,
   tsconfigJson,
-];
+  ].reduce(
+    (acc, current) => {
+      acc[current.fileName] = current;
+      return acc;
+    },
+    {} as ProjectFiles
+  );
 
 project.regenerateFiles();
