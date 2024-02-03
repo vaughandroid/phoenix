@@ -23,7 +23,7 @@ export class ProjectFile {
     customiseJson: CustomiseJsonFn | undefined = undefined,
   ): ProjectFile {
     const customiseContents = customiseJson
-      ? createCustomiseJsonFn(customiseJson)
+      ? createCustomiseJsonContents(customiseJson)
       : undefined
     return new ProjectFile({ templatePath, customiseContents })
   }
@@ -36,7 +36,7 @@ export class ProjectFile {
 
   static jsonFileFromScratch(customiseJson: CustomiseJsonFn): ProjectFile {
     return new ProjectFile({
-      customiseContents: createCustomiseJsonFn(customiseJson),
+      customiseContents: createCustomiseJsonContents(customiseJson),
     })
   }
 
@@ -69,13 +69,11 @@ export class ProjectFile {
   }
 }
 
-function createCustomiseJsonFn(
+export function createCustomiseJsonContents(
   customiseJson: CustomiseJsonFn,
 ): CustomiseContentsFn {
   return (contents: string) => {
-    console.log(contents)
     let jsonContents = JSON.parse(contents)
-    console.log(jsonContents)
     jsonContents = customiseJson(jsonContents)
     return JSON.stringify(jsonContents, undefined, 2)
   }

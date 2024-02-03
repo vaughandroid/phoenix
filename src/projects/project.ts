@@ -1,4 +1,9 @@
-import { deleteFiles, findMarkedFiles, writeFile } from '../util/fileUtils'
+import {
+  deleteFiles,
+  findMarkedFiles,
+  getAllFilePathsInFolder,
+  writeFile,
+} from '../util/fileUtils'
 import { ProjectFile } from './projectFile'
 import { Tokens } from './tokens'
 
@@ -12,12 +17,23 @@ interface ProjectParams {
   regeneratedFiles?: ProjectFiles
 }
 
-interface ProjectFiles{
+interface ProjectFiles {
   /** The key is the path of the generated file, relative to the project root. */
   [outputPath: string]: ProjectFile
 }
 
 export class Project {
+  static fromTemplateFolder(folderPath: string): Project {
+    const project = new Project()
+
+    const filePaths = getAllFilePathsInFolder(folderPath)
+    filePaths.forEach(filePath => {
+      project.regeneratedFiles[filePath] = ProjectFile.fromTemplate(`${folderPath}/${filePath}`)
+    })
+
+    return project
+  }
+
   /**
    * The set of tokens which will be used during file generation.
    * The key is the token name and the value is the value which will be used in the generated file.

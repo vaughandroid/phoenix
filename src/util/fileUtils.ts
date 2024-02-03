@@ -29,7 +29,7 @@ export function deleteFiles(paths: string[]): void {
 export function findMarkedFiles(marker: string): string[] {
   const allFilePaths = FastGlob.globSync('**', {
     ignore: ['node_modules/**', '.git/**'],
-    dot: true // Include dotfiles
+    dot: true, // Include dotfiles
   })
 
   const generatedFiles: string[] = []
@@ -42,4 +42,11 @@ export function findMarkedFiles(marker: string): string[] {
   })
 
   return generatedFiles
+}
+
+export function getAllFilePathsInFolder(folderPath: string): string[] {
+  return FastGlob.globSync('**', {
+    cwd: folderPath,
+    dot: true, // Include dotfiles
+  })
 }

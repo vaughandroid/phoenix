@@ -4,7 +4,7 @@
 
 [x] Make projectFiles an object, with filenames for keys
 [x] Refactor ProjectFiles
-[ ] Add `Project.fromTemplate()` factory method
+[x] Add `Project.fromTemplate()` factory method
 [ ] Update sample to include creating from scratch
 [ ] Unit tests
   [ ] Token replacement
