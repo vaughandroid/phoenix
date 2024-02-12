@@ -2,24 +2,24 @@ import { readFile } from '../util/fileUtils'
 import { replaceTokens } from '../util/tokenUtils'
 import { Tokens } from './tokens'
 
-type CustomiseContentsFn = (contents: string) => string
+type CustomiseTextFn = (contents: string) => string
 type CustomiseJsonFn = (json: any) => any
 
 export interface ProjectFileParams {
   templatePath?: string
-  customiseContents?: CustomiseContentsFn
+  customiseContents?: CustomiseTextFn
 }
 
 export class ProjectFile {
   static textFileFromTemplate(
     templatePath: string,
-    customiseContents?: CustomiseContentsFn,
+    customiseContents?: CustomiseTextFn,
   ): ProjectFile {
     return new ProjectFile({ templatePath, customiseContents })
   }
 
   static textFileFromScratch(
-    contentsOrCustomiseContentsFn: CustomiseContentsFn | string,
+    contentsOrCustomiseContentsFn: CustomiseTextFn | string,
   ): ProjectFile {
     const customiseContents =
       typeof contentsOrCustomiseContentsFn === 'function'
@@ -33,7 +33,7 @@ export class ProjectFile {
     customiseJson: CustomiseJsonFn | undefined = undefined,
   ): ProjectFile {
     const customiseContents = customiseJson
-      ? createCustomiseJsonContents(customiseJson)
+      ? customiseJsonContents(customiseJson)
       : undefined
     return new ProjectFile({ templatePath, customiseContents })
   }
@@ -45,7 +45,7 @@ export class ProjectFile {
       typeof contentsOrCustomiseJsonFn === 'function'
         ? contentsOrCustomiseJsonFn
         : () => contentsOrCustomiseJsonFn
-    createCustomiseJsonContents(contentsOrCustomiseJsonFn)
+    customiseJsonContents(contentsOrCustomiseJsonFn)
     return new ProjectFile({ customiseContents })
   }
 
@@ -58,7 +58,7 @@ export class ProjectFile {
    * An optional function which can be used to customise the file.
    * This is called after token replacement has been performed.
    */
-  customiseContents?: CustomiseContentsFn
+  customiseContents?: CustomiseTextFn
 
   constructor(params: ProjectFileParams) {
     this.templatePath = params.templatePath
@@ -78,9 +78,9 @@ export class ProjectFile {
   }
 }
 
-export function createCustomiseJsonContents(
+export function customiseJsonContents(
   customiseJson: CustomiseJsonFn,
-): CustomiseContentsFn {
+): CustomiseTextFn {
   return (contents: string) => {
     let jsonContents = JSON.parse(contents)
     jsonContents = customiseJson(jsonContents)

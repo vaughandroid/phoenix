@@ -1,6 +1,6 @@
 // Would be from "@vaughandroid/phoenix" in a real project
 import {
-  createCustomiseJsonContents,
+  customiseJsonContents,
   Project,
   ProjectFile,
   REGENERATED_FILE_MARKER,
@@ -17,7 +17,7 @@ project.tokens = {
 };
 
 project.regeneratedFiles['package.json'].customiseContents =
-  createCustomiseJsonContents((json: any) => {
+  customiseJsonContents((json: any) => {
     // Use a local filesystem link rather than NPM as we always want to use the current local code.
     json['devDependencies']['@vaughandroid/phoenix'] = 'link:../../';
     // Add a dependency that doesn't exist in the template.
