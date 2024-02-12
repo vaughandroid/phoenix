@@ -28,7 +28,7 @@ export class Project {
 
     const filePaths = getAllFilePathsInFolder(folderPath)
     filePaths.forEach(filePath => {
-      project.regeneratedFiles[filePath] = ProjectFile.fromTemplate(`${folderPath}/${filePath}`)
+      project.regeneratedFiles[filePath] = ProjectFile.textFileFromTemplate(`${folderPath}/${filePath}`)
     })
 
     return project

@@ -11,14 +11,24 @@ export interface ProjectFileParams {
 }
 
 export class ProjectFile {
-  static fromTemplate(
+  static textFileFromTemplate(
     templatePath: string,
     customiseContents?: CustomiseContentsFn,
   ): ProjectFile {
     return new ProjectFile({ templatePath, customiseContents })
   }
 
-  static fromJsonTemplate(
+  static textFileFromScratch(
+    contentsOrCustomiseContentsFn: CustomiseContentsFn | string,
+  ): ProjectFile {
+    const customiseContents =
+      typeof contentsOrCustomiseContentsFn === 'function'
+        ? contentsOrCustomiseContentsFn
+        : () => contentsOrCustomiseContentsFn
+    return new ProjectFile({ customiseContents })
+  }
+
+  static jsonFileFromTemplate(
     templatePath: string,
     customiseJson: CustomiseJsonFn | undefined = undefined,
   ): ProjectFile {
@@ -28,16 +38,15 @@ export class ProjectFile {
     return new ProjectFile({ templatePath, customiseContents })
   }
 
-  static textFileFromScratch(
-    customiseContents: CustomiseContentsFn,
+  static jsonFileFromScratch(
+    contentsOrCustomiseJsonFn: CustomiseJsonFn | any,
   ): ProjectFile {
+    const customiseContents =
+      typeof contentsOrCustomiseJsonFn === 'function'
+        ? contentsOrCustomiseJsonFn
+        : () => contentsOrCustomiseJsonFn
+    createCustomiseJsonContents(contentsOrCustomiseJsonFn)
     return new ProjectFile({ customiseContents })
-  }
-
-  static jsonFileFromScratch(customiseJson: CustomiseJsonFn): ProjectFile {
-    return new ProjectFile({
-      customiseContents: createCustomiseJsonContents(customiseJson),
-    })
   }
 
   /**
